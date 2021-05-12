@@ -1,0 +1,34 @@
+Useful notes and links
+
+youtube tutorial video:
+https://www.youtube.com/watch?v=Vr_ahm78h_g&list=PL4cUxeGkcC9j--TKIdkb3ISfRbJeJYQwC&index=15
+
+
+https://firebase.flutter.dev/
+
+
+// need this for implementing Firebase
+void main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+    runApp(MyApp());
+}
+https://stackoverflow.com/questions/63492211/no-firebase-app-default-has-been-created-call-firebase-initializeapp-in
+
+
+
+
+Plugins:
+
+firebase_core
+https://pub.dev/packages/firebase_core/install
+
+cloud_firestore
+https://pub.dev/packages/cloud_firestore
+
+Flutter Spinkit
+https://pub.dev/packages/flutter_spinkit
+
+
+provider
+https://pub.dev/packages/provider
