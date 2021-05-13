@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
         child: Scaffold(
       backgroundColor: Colors.brown[50],
       appBar: AppBar(
-        title: Text('Brew Crew'),
+        title: Text('Property Expense Tracker'),
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
         actions: <Widget>[
@@ -47,32 +47,30 @@ class Home extends StatelessWidget {
         ],
       ),
       body: Center(
-          child: Column(
-          children: [
-            ElevatedButton.icon(
-              label: Text('Add a New Property'),
-              icon: Icon(Icons.web),
-              onPressed: () {
-                print('Pressed');
-                Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NewProperty())
-                  );
-              },
-            ),
-            ElevatedButton.icon(
-              label: Text('View Your Properties'),
-              icon: Icon(Icons.web),
-              onPressed: () {
-                print('Pressed');
-                Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ViewProperties())
-                  );
-              },
-            )
-          ],
-        )),
+        child: Column(            
+        children: [
+          SizedBox(height: 250),
+          ElevatedButton.icon(
+            label: Text('Add a New Property'),
+            icon: Icon(Icons.apartment),
+            onPressed: () {
+              print('Pressed');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NewProperty()));
+            },
+          ),
+          SizedBox(height: 20),
+          ElevatedButton.icon(
+            label: Text('View Your Properties'),
+            icon: Icon(Icons.web),
+            onPressed: () {
+              print('Pressed');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ViewProperties()));
+            },
+          )
+        ],
+      )),
     ));
   }
 }

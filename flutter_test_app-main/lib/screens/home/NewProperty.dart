@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/models/property.dart';
-
+import '../../services/auth.dart';
+import '../../services/database.dart';
 import '../../shared/constants.dart';
 
 class NewProperty extends StatelessWidget {
@@ -54,9 +56,11 @@ class MyCustomFormState extends State<MyCustomForm> {
     // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
+      
       child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
           child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
 
           children: <Widget>[
             SizedBox(height: 20),
@@ -178,6 +182,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                     // print(numberOfUnits);
                     Property property = new Property(propertyName, propertyAddress, mortgagePayment, schoolTax, municipalTax, insurance, numberOfUnits);
                     print(property.propertyName);
+                   
+                    DatabaseService(uid: AuthService().currentUser()).updatePropertyData(property.propertyName, property.propertyAddress, property.mortgagePayment, property.schoolTax, property.municipalTax, property.insurance, property.numberOfUnits);
+                   
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text('Processing Data')));
                   }
