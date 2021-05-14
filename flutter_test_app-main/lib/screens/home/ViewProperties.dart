@@ -13,44 +13,13 @@ class ViewProperties extends StatefulWidget {
 }
 
 class _ViewPropertiesState extends State<ViewProperties> {
-  final CollectionReference users =
+  final CollectionReference propertiesRef =
       FirebaseFirestore.instance.collection('properties');
 
-  Future getUsersList() async {
-    DocumentSnapshot variable = await FirebaseFirestore.instance
-        .collection('properties')
-        .doc(AuthService().currentUser())
-        .get();
-
-    // for(var i in variable['properties']){
-    //   print(i.get());
-    // }
-
-    //print(variable['properties']);
-    // List itemsList = [];
-
-    // await users.doc().get().then((QuerySnapshot){
-    //   querySnapshot.documents.forEach((element) {
-    //     itemsList.add(element.data);
-    //   });
-    // });
-  }
-
-  // Future getPost() async{
-  //   var firestore = FirebaseFirestore.instance;
-  //   DocumentReference doc = await firestore.collection('properties').doc(AuthService().currentUser());
-  //   // DatabaseService(uid: AuthService().currentUser());
-  //   print('-------------------------------------helllllllllo');
-  //   print(doc.toString());
-  //   print('hemennnnnnnnnnnnnnnd');
-
-  // }
 
   @override
   Widget build(BuildContext context) {
     final appTitle = 'Add a New Property';
-
-    // var dc = getUsersList();
 
     return MaterialApp(
       title: appTitle,
@@ -61,23 +30,68 @@ class _ViewPropertiesState extends State<ViewProperties> {
             backgroundColor: Colors.brown[400],
             title: Text(appTitle),
           ),
-          body: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('properties').snapshots(),
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-              if(!snapshot.hasData){
-                return Text('no value');
+          body: FutureBuilder<DocumentSnapshot>(
+            future: propertiesRef.doc(AuthService().currentUser()).get(),
+            builder:
+                (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  print("okkkkk");
+              if (snapshot.hasError) {
+                return Text("Something went wrong");
               }
-              return ListView(
-                children: snapshot.data.docs.map((document) {
-                    print('hellllllllllllllllllllllllllllloooooooooooooooooo');
-                    print(document['properties'][0]);
-                    return Text(document['properties'][0]['propertyName']);
-                }).toList(),
-              );
-            }
+              
+              if (snapshot.hasData && !snapshot.data.exists) {
+                return Text("Document does not exist");
+              }
 
+              if (snapshot.connectionState == ConnectionState.done) {
+                Map<String, dynamic> data = snapshot.data.data();
+                var properties = data['properties'].map<Widget>(  (res) {
+                      return new Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            ListTile(
+                              leading: Icon(Icons.album),
+                              title: Text('${res['propertyName']}'),
+                              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                TextButton(
+                                  child: const Text('delete'),
+                                  onPressed: () async {
+                                     await propertiesRef.doc(AuthService().currentUser()).update({
+                                       "properties": FieldValue.arrayRemove([res])
+                                     }).then((value) => print("User Updated"))
+                                      .catchError((error) => print("Failed to update user: $error"));
 
-          )
+                                  },
+                                ),
+                                const SizedBox(width: 8),
+                                TextButton(
+                                  child: const Text('LISTEN'),
+                                  onPressed: () {/* ... */},
+                                ),
+                                const SizedBox(width: 8),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                }).toList();
+                return ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: properties.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return properties[index];
+                  }
+                );
+              }
+
+              return Text("loading");
+            },
+          ),
         ),
     );
   }
