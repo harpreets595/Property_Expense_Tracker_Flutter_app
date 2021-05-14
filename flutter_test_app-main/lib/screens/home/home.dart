@@ -63,8 +63,10 @@ class Home extends StatelessWidget {
           ElevatedButton.icon(
             label: Text('View Your Properties'),
             icon: Icon(Icons.web),
-            onPressed: () {
-              print('Pressed');
+            onPressed: () async {
+              //  DocumentSnapshot variable = await FirebaseFirestore.instance.collection('properties').doc(AuthService().currentUser()).get();
+              //   print(variable['properties']);
+              // print('Pressed');
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ViewProperties()));
             },

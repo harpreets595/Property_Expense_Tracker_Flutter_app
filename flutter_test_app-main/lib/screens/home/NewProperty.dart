@@ -4,6 +4,7 @@ import 'package:flutter_app/models/property.dart';
 import '../../services/auth.dart';
 import '../../services/database.dart';
 import '../../shared/constants.dart';
+import 'home.dart';
 
 class NewProperty extends StatelessWidget {
   @override
@@ -186,10 +187,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                     DatabaseService(uid: AuthService().currentUser()).updatePropertyData(property.propertyName, property.propertyAddress, property.mortgagePayment, property.schoolTax, property.municipalTax, property.insurance, property.numberOfUnits);
                    
                     ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text('Processing Data')));
+                        .showSnackBar(SnackBar(content: Text('Added Property Successfully')));
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                    );
                   }
                 },
-                child: Text('Submit'),
+                child: Text('Add This Property'),
               ),
             ),
           ],
