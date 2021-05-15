@@ -25,6 +25,7 @@ class _ViewPropertiesState extends State<ViewProperties> {
     final appTitle = 'All Properties';
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
           backgroundColor: Colors.brown[100],

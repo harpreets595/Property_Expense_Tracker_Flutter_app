@@ -9,6 +9,7 @@ class ViewExpenses extends StatelessWidget {
     final appTitle = "Property Details";
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
           backgroundColor: Colors.brown[100],

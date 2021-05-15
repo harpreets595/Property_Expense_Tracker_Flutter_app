@@ -11,6 +11,7 @@ class NewProperty extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTitle = 'Add a New Property';
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appTitle,
       home: Scaffold(
         backgroundColor: Colors.brown[100],
@@ -70,7 +71,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               // The validator receives the text that the user has entered.
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Please enter a Property Name';
                 }
                 return null;
               },
@@ -84,7 +85,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               // The validator receives the text that the user has entered.
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Please enter Property Address';
                 }
                 return null;
               },
@@ -99,7 +100,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               // The validator receives the text that the user has entered.
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Please enter Mortgage Payment';
                 }
                 return null;
               },
@@ -114,7 +115,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               // The validator receives the text that the user has entered.
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Please enter School Tax';
                 }
                 return null;
               },
@@ -129,7 +130,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               // The validator receives the text that the user has entered.
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Please enter Municipal Tax';
                 }
                 return null;
               },
@@ -144,7 +145,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               // The validator receives the text that the user has entered.
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Please enter Insurance';
                 }
                 return null;
               },
@@ -159,7 +160,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               // The validator receives the text that the user has entered.
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
+                  return 'Please enter the Number of Units';
                 }
                 return null;
               },
