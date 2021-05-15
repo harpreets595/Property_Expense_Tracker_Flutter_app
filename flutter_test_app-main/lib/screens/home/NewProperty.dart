@@ -170,6 +170,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.pink[400]),
                 onPressed: () {
                   
                   // Validate returns true if the form is valid, or false otherwise.
@@ -189,13 +190,14 @@ class MyCustomFormState extends State<MyCustomForm> {
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text('Added Property Successfully')));
 
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => Home()),
                     );
                   }
                 },
                 child: Text('Add This Property'),
+                
               ),
             ),
           ],
